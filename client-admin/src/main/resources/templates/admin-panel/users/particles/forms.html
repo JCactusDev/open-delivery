@@ -1,0 +1,44 @@
+<form class="edit_form grid_area" th:action="@{/users/signup}" th:method="post" th:fragment="new-user-form">
+<!--    <input type="hidden" th:name="${_csrf.getParameterName()}" th:value="${_csrf.getToken()}"/>-->
+
+    <label for="id">ID</label>
+    <input type="text" id="id" th:value="${user.id}" readonly>
+
+    <label for="username">Имя пользователя</label>
+    <input type="text" name="username" id="username" th:value="${user.username}" required>
+
+    <label for="password">Пароль</label>
+    <input type="password" name="password" id="password" th:value="${user.password}" required>
+
+    <label for="email">Email</label>
+    <input type="email" name="email" id="email" th:value="${user.email}">
+
+    <label for="phone">Номер телефона</label>
+    <input type="tel" name="phone" id="phone" th:value="${user.phone}">
+
+    <button type="submit">Сохранить</button>
+</form>
+
+<form class="edit_form grid_area" th:action="@{/users/{id}(id=*{user.id})}" th:method="patch" th:fragment="update-user-form">
+
+    <label for="id">ID</label>
+    <input type="text" id="id" th:value="${user.id}" readonly>
+
+    <label for="username">Имя пользователя</label>
+    <input type="text" name="username" id="username" th:value="${user.username}" required>
+
+    <label for="password">Пароль</label>
+    <input type="password" name="password" id="password" value="" required>
+
+    <label for="email">Email</label>
+    <input type="email" name="email" id="email" th:value="${user.email}">
+
+    <label for="phone">Номер телефона</label>
+    <input type="tel" name="phone" id="phone" th:value="${user.phone}">
+
+    <button type="submit">Сохранить</button>
+</form>
+
+<form th:action="@{/users/{id}(id=*{user.id})}" th:method="delete" th:fragment="delete-user-form">
+    <button type="submit">Удалить</button>
+</form>

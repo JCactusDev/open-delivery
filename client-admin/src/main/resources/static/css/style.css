@@ -1,0 +1,101 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+body {
+    display: grid;
+    grid-template-areas:
+    "header header"
+    "nav main"
+    "footer footer";
+    grid-template-rows: 40px 1fr 40px;
+    grid-template-columns: 200px 1fr;
+    grid-row-gap: 4px;
+    grid-column-gap: 4px;
+    height: 100vh;
+    margin: 0;
+    background-color: #212121;
+    color: gray;
+}
+a {
+    color: gray;
+}
+.header {
+    grid-area: header;
+    background: #282828;
+}
+.footer {
+    grid-area: footer;
+    background: #282828;
+}
+.main {
+    grid-area: main;
+    background: #282828;
+}
+.nav {
+    grid-area: nav;
+    background: #282828;
+}
+/************************************************/
+.grid_area {
+    display: grid;
+    grid-template-columns: [labels] auto [controls] 1fr;
+    grid-auto-flow: row;
+    grid-gap: .8em .5em;
+    padding: 1.2em;
+}
+.grid_area {
+    display: grid;
+    grid-template-columns: [labels] auto [controls] 1fr;
+    grid-auto-flow: row;
+    grid-gap: .8em .5em;
+    padding: 1.2em;
+}
+.edit_form > label,
+.edit_form > fieldset,
+.edit_form > fieldset > label {
+    grid-column: labels;
+    grid-row: auto;
+    color: gray;
+}
+.edit_form > input,
+.edit_form > fieldset > input,
+.edit_form > table > tbody > tr > td input,
+.edit_form > select,
+.edit_form > textarea {
+    grid-column: controls;
+    grid-row: auto;
+    padding: .4em;
+    width: 100%;
+    border: 0;
+    background-color: dimgray;
+    color: #bbbbbb;
+}
+.edit_form > fieldset,
+.edit_form > table,
+.edit_form > button {
+    grid-column: span 2;
+}
+.edit_form > button {
+    padding: 1em;
+    border: 0;
+    background-color: darkgray;
+    color: black;
+}
+.edit_form > textarea {
+    min-height: 6em;
+}
+/************************************************/
+/* Stack the layout on small devices/viewports. */
+@media all and (max-width: 575px) {
+    body {
+        grid-template-areas:
+      "header"
+      "main"
+      "nav"
+      "footer";
+        grid-template-rows: 80px 1fr 70px 1fr 70px;
+        grid-template-columns: 1fr;
+    }
+}

@@ -1,0 +1,40 @@
+<form class="edit_form grid_area" th:action="@{/products/create}" th:method="post" th:fragment="new-product-form">
+    <input type="hidden" th:name="${_csrf.getParameterName()}" th:value="${_csrf.getToken()}"/>
+
+    <label for="id">ID</label>
+    <input type="text" id="id" th:value="${product.id}" readonly>
+
+    <fieldset class="grid_area">
+        <legend>Наименование</legend>
+        <!--Рабочее-->
+        <label for="name">Рабочее*</label>
+        <input type="text" name="name" id="name" th:value="${product.name}" placeholder="Имя используемое для отображения в системе" required>
+    </fieldset>
+
+    <label for="description">Описание</label>
+    <textarea name="description" id="description" maxlength="500" th:text="${product.description}"></textarea>
+
+    <button type="submit">Сохранить</button>
+</form>
+
+<form class="edit_form grid_area" th:action="@{/products/{id}(id=*{product.id})}" th:method="patch" th:fragment="update-product-form">
+
+    <label for="id">ID</label>
+    <input type="text" id="id" th:value="${product.id}" readonly>
+
+    <fieldset class="grid_area">
+        <legend>Наименование</legend>
+        <!--Рабочее-->
+        <label for="name">Рабочее*</label>
+        <input type="text" name="name" id="name" th:value="${product.name}" placeholder="Имя используемое для отображения в системе" required>
+    </fieldset>
+
+    <label for="description">Описание</label>
+    <textarea name="description" id="description" maxlength="500" th:text="${product.description}"></textarea>
+
+    <button type="submit">Сохранить</button>
+</form>
+
+<form th:action="@{/products/{id}(id=*{product.id})}" th:method="delete" th:fragment="delete-product-form">
+    <button type="submit">Удалить</button>
+</form>

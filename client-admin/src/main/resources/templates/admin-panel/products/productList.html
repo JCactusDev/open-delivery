@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <th:block th:replace="~{admin-panel/global/general.html :: meta}"></th:block>
+        <th:block th:replace="~{admin-panel/global/general.html :: link}"></th:block>
+        <title>Страница списка номенклатуры</title>
+    </head>
+    <body>
+        <header class="header" th:replace="~{admin-panel/global/general.html :: header}">Header</header>
+        <main class="main">
+            <a href="/products/create">Создать</a>
+            <table class="table-catalog" th:replace="~{admin-panel/products/particles/tables.html :: product-list}"></table>
+        </main>
+        <nav class="nav" th:replace="~{admin-panel/global/general.html :: nav}">Nav</nav>
+        <footer class="footer" th:replace="~{admin-panel/global/general.html :: footer}">Footer</footer>
+    </body>
+</html>

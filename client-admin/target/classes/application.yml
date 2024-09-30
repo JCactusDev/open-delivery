@@ -1,0 +1,32 @@
+server:
+  port: 8080
+
+logging:
+  level:
+    root: INFO
+    org.springframework.web: INFO
+    org.springframework.security: INFO
+    org.springframework.security.oauth2: TRACE
+
+spring:
+  application:
+    name: client-admin
+  security:
+    oauth2:
+      client:
+        registration:
+          web-client-oidc:
+            provider: spring
+            client-id: web-client
+            client-secret: secret
+            authorization-grant-type: authorization_code
+            redirect-uri: "http://127.0.0.1:8080/login/oauth2/code/{registrationId}"
+            scope: openid, users.read, users.update, users.delete, organizations.read, organizations.update, organizations.delete, clients.read, clients.update, clients.delete, products.read, products.update, products.delete
+            client-name: "OpenID"
+        provider:
+          spring:
+            issuer-uri: http://authserver:9000
+  mvc:
+    hiddenmethod:
+      filter:
+        enabled: true

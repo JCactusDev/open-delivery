@@ -1,0 +1,110 @@
+<form class="edit_form grid_area" th:action="@{/organizations/create}" th:method="post" th:fragment="new-organization-form">
+    <input type="hidden" th:name="${_csrf.getParameterName()}" th:value="${_csrf.getToken()}"/>
+
+    <label for="id">ID</label>
+    <input type="text" id="id" th:value="${organization.id}" readonly>
+
+    <fieldset class="grid_area">
+        <legend>Наименование</legend>
+        <!--Рабочее-->
+        <label for="name">Рабочее*</label>
+        <input type="text" name="name" id="name" th:value="${organization.name}" placeholder="Имя используемое для отображения в системе" required>
+        <!--Полное-->
+        <label for="fullName">Полное*</label>
+        <input type="text" name="fullName" id="fullName" th:value="${organization.fullName}" required>
+        <!--Сокращенное-->
+        <label for="shortName">Сокращенное*</label>
+        <input type="text" name="shortName" id="shortName" th:value="${organization.shortName}" required>
+        <!--Международное-->
+        <label for="internationalName">Международное </label>
+        <input type="text" name="internationalName" id="internationalName" th:value="${organization.internationalName}">
+    </fieldset>
+
+    <label for="type">Форма собственности*</label>
+    <select name="type" id="type" th:field="*{organization.type}" required>
+        <option value="" selected hidden>Выберите форму собственности</option>
+        <option value="LegalPerson">Юридическое лицо</option>
+        <option value="SoleProprietorship">Индивидуальный предприниматель</option>
+        <option value="SelfEmployment">Самозанятый</option>
+    </select>
+
+    <label for="taxNumber">ИНН</label>
+    <input type="text" name="taxNumber" id="taxNumber" th:value="${organization.taxNumber}" required>
+
+    <fieldset class="grid_area">
+        <legend>Свидетельство о регистрации*</legend>
+        <!--Номер регистрации-->
+        <label for="regNumber">Рег. номер</label>
+        <input type="text" name="regNumber" id="regNumber" th:value="${organization.regNumber}" required>
+        <!--Дата регистрации-->
+        <label for="regDate">Действует с</label>
+        <input type="date" name="regDate" id="regDate" th:field="${organization.regDate}" required>
+    </fieldset>
+
+    <fieldset>
+        <legend>Обмен информацией</legend>
+        <label><input type="checkbox" name="extras" id="exchange_one_s" value="ones">1С</label>
+    </fieldset>
+
+    <label for="description">Описание</label>
+    <textarea name="description" id="description" maxlength="500" th:text="${organization.description}"></textarea>
+
+    <button type="submit">Сохранить</button>
+</form>
+
+<form class="edit_form grid_area" th:action="@{/organizations/{id}(id=*{organization.id})}" th:method="patch" th:fragment="update-organization-form">
+
+    <label for="id">ID</label>
+    <input type="text" id="id" th:value="${organization.id}" readonly>
+
+    <fieldset class="grid_area">
+        <legend>Наименование</legend>
+        <!--Рабочее-->
+        <label for="name">Рабочее*</label>
+        <input type="text" name="name" id="name" th:value="${organization.name}" placeholder="Имя используемое для отображения в системе" required>
+        <!--Полное-->
+        <label for="fullName">Полное*</label>
+        <input type="text" name="fullName" id="fullName" th:value="${organization.fullName}" required>
+        <!--Сокращенное-->
+        <label for="shortName">Сокращенное*</label>
+        <input type="text" name="shortName" id="shortName" th:value="${organization.shortName}" required>
+        <!--Международное-->
+        <label for="internationalName">Международное </label>
+        <input type="text" name="internationalName" id="internationalName" th:value="${organization.internationalName}">
+    </fieldset>
+
+    <label for="type">Форма собственности*</label>
+    <select name="type" id="type" th:field="*{organization.type}" required>
+        <option value="" selected hidden>Выберите форму собственности</option>
+        <option value="LegalPerson">Юридическое лицо</option>
+        <option value="SoleProprietorship">Индивидуальный предприниматель</option>
+        <option value="SelfEmployment">Самозанятый</option>
+    </select>
+
+    <label for="taxNumber">ИНН</label>
+    <input type="text" name="taxNumber" id="taxNumber" th:value="${organization.taxNumber}" required>
+
+    <fieldset class="grid_area">
+        <legend>Свидетельство о регистрации*</legend>
+        <!--Номер регистрации-->
+        <label for="regNumber">Рег. номер</label>
+        <input type="text" name="regNumber" id="regNumber" th:value="${organization.regNumber}" required>
+        <!--Дата регистрации-->
+        <label for="regDate">Действует с</label>
+        <input type="date" name="regDate" id="regDate" th:field="${organization.regDate}" required>
+    </fieldset>
+
+    <fieldset>
+        <legend>Обмен информацией</legend>
+        <label><input type="checkbox" name="extras" id="exchange_one_s" value="ones">1С</label>
+    </fieldset>
+
+    <label for="description">Описание</label>
+    <textarea name="description" id="description" maxlength="500" th:text="${organization.description}"></textarea>
+
+    <button type="submit">Сохранить</button>
+</form>
+
+<form th:action="@{/organizations/{id}(id=*{organization.id})}" th:method="delete" th:fragment="delete-organization-form">
+    <button type="submit">Удалить</button>
+</form>

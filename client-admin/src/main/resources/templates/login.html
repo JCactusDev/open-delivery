@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <th:block th:replace="~{/admin-panel/global/general.html :: meta}"></th:block>
+    <th:block th:replace="~{/admin-panel/global/general.html :: link}"></th:block>
+    <title>Login</title>
+  </head>
+  <body>
+    <header class="header" th:replace="~{/admin-panel/global/general.html :: header}">Header</header>
+    <main class="main">
+      <a th:href="@{/oauth2/authorization/web-client-oidc}">Авторизация (OPENID)</a>
+    </main>
+    <nav class="nav" th:replace="~{/admin-panel/global/general.html :: nav}">Nav</nav>
+    <footer class="footer" th:replace="~{admin-panel/global/general.html :: footer}">Footer</footer>
+  </body>
+</html>
+

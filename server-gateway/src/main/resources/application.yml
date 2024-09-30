@@ -1,0 +1,28 @@
+server:
+  port: 8010
+
+logging:
+  level:
+    root: INFO
+    reactor.netty: INFO
+    org.springframework.cloud.gateway: INFO
+    org.springframework.http.server.reactive: INFO
+
+spring:
+  application:
+    name: server-gateway
+  security:
+    oauth2.resourceserver.jwt.issuer-uri: http://authserver:9000
+  cloud:
+    gateway:
+      routes:
+        - id: server-userdata
+          uri: http://localhost:9090
+          predicates:
+            - Path=/api/v1/users/**
+        - id: server-resource
+          uri: http://localhost:8090
+          predicates:
+            - Path=/api/v1/organizations/**, /api/v1/clients/**, /api/v1/products/**
+      httpserver.wiretap: true
+      httpclient.wiretap: true

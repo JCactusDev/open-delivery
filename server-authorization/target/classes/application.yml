@@ -1,0 +1,54 @@
+server:
+  port: 9000
+
+logging:
+  level:
+    root: INFO
+    org.springframework.web: INFO
+    org.springframework.security: INFO
+    org.springframework.security.oauth2: TRACE
+
+eureka:
+  client.serviceUrl.defaultZone: http://127.0.0.1:8000/eureka/
+  instance:
+    hostname: 127.0.0.1
+    instance-id: ${eureka.instance.hostname}:${spring.application.name}:${server.port}
+
+spring:
+  application:
+    name: server-authorization
+  security:
+    oauth2:
+      authorizationserver:
+        issuer: http://authserver:9000
+        client:
+          web-client:
+            registration:
+              client-id: web-client
+              client-secret: "{noop}secret"
+              client-name: Web Client
+              client-authentication-methods:
+                - client_secret_basic
+                - client_secret_post
+              authorization-grant-types:
+                - authorization_code
+                - refresh_token
+              redirect-uris:
+                - http://127.0.0.1:8080/login/oauth2/code/web-client-oidc
+                - http://127.0.0.1:8080/authorized
+              post-logout-redirect-uris:
+                - http://127.0.0.1:8080
+              scopes:
+                - openid
+                - users.read
+                - users.update
+                - users.delete
+                - organizations.read
+                - organizations.update
+                - organizations.delete
+                - clients.read
+                - clients.update
+                - clients.delete
+                - products.read
+                - products.update
+                - products.delete

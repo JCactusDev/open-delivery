@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <th:block th:replace="~{admin-panel/global/general.html :: meta}"></th:block>
+        <th:block th:replace="~{admin-panel/global/general.html :: link}"></th:block>
+        <title>Страница редактирования организации</title>
+    </head>
+    <body>
+        <header class="header" th:replace="~{admin-panel/global/general.html :: header}">Header</header>
+        <main class="main">
+            <form class="edit_form grid_area" th:replace="~{admin-panel/organizations/particles/forms.html :: update-organization-form}"></form>
+            <form class="edit_form grid_area" th:replace="~{admin-panel/organizations/particles/forms.html :: delete-organization-form}"></form>
+        </main>
+        <nav class="nav" th:replace="~{admin-panel/global/general.html :: nav}">Nav</nav>
+        <footer class="footer" th:replace="~{admin-panel/global/general.html :: footer}">Footer</footer>
+    </body>
+</html>
+

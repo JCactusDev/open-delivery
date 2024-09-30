@@ -1,0 +1,38 @@
+<th:block th:fragment="meta" xmlns:sec="http://www.w3.org/1999/xhtml">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</th:block>
+
+<th:block th:fragment="link">
+  <link rel="stylesheet" href="/css/style.css">
+</th:block>
+
+<header class="header" th:fragment="header">
+
+  <th:block sec:authorize="isAuthenticated()">
+    <p>Привет, <strong th:text="${#authentication.name}"></strong>!</p>
+    <a th:href="@{/logout}">Выйти</a>
+  </th:block>
+
+  <th:block sec:authorize="isAnonymous()">
+    <a th:href="@{/login}">Войти</a> | <a th:href="@{/users/signup}">Зарегистрироваться</a>
+  </th:block>
+
+</header>
+
+<main class="main" th:fragment="main">
+  Main general
+</main>
+
+<nav class="nav" th:fragment="nav">
+  <ul>
+    <li><a href="/users">Пользователи</a></li>
+    <li><a href="/organizations">Организации</a></li>
+    <li><a href="/clients">Клиенты</a></li>
+    <li><a href="/products">Номенклатура</a></li>
+  </ul>
+</nav>
+
+<footer class="footer" th:fragment="footer">
+  <p>Your authorities are: <strong th:each="authority : ${#authentication.authorities}"><span th:text="${authority.authority} + ' '"></span></strong></p>
+</footer>

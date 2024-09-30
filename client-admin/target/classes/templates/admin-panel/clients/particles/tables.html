@@ -1,0 +1,23 @@
+<table class="table-catalog" th:fragment="client-list">
+    <thead>
+    <tr>
+        <td>ID</td>
+        <td>Наименование</td>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:if="${clients.size() > 0}" th:each="client : ${clients}">
+        <td th:text="${client.id}">id</td>
+        <td><a th:href="@{/clients/{id}(id=${client.id})}">[[${client.name}]]</a></td>
+    </tr>
+    <tr th:unless="${clients.size() > 0}">
+        <th scope="row" colspan="4">Пусто</th>
+    </tr>
+    </tbody>
+    <tfoot th:if="${clients.size() > 0}">
+    <tr>
+        <th scope="row" colspan="2">Всего:</th>
+        <th>[[${clients.size()}]]</th>
+    </tr>
+    </tfoot>
+</table>

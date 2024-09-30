@@ -1,0 +1,37 @@
+server:
+  port: 8090
+
+logging:
+  level:
+    root: INFO
+    org.springframework.web: INFO
+    org.springframework.security: INFO
+    org.springframework.security.oauth2: INFO
+
+eureka:
+  client.serviceUrl.defaultZone: http://127.0.0.1:8000/eureka/
+  instance:
+    hostname: 127.0.0.1
+    instance-id: ${eureka.instance.hostname}:${spring.application.name}:${server.port}
+
+spring:
+  application:
+    name: server-resource
+  security:
+    oauth2.resourceserver.jwt.issuer-uri: http://authserver:9000
+  datasource:
+    url: jdbc:postgresql://localhost:5433/microservice_resource
+    username: root
+    password: root
+    driver-class-name: org.postgresql.Driver
+    hikari:
+      allow-pool-suspension: true
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: false
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        current_session_context_class: thread
+        format_sql: true
