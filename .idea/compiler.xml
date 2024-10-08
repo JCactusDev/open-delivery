@@ -10,6 +10,7 @@
         <module name="server-gateway" />
         <module name="service-organization" />
         <module name="server-eureka" />
+        <module name="service-client" />
         <module name="server-resource" />
         <module name="server-authorization" />
         <module name="server-userdata" />
@@ -25,6 +26,7 @@
       <module name="server-gateway" options="-parameters" />
       <module name="server-resource" options="-parameters" />
       <module name="server-userdata" options="-parameters" />
+      <module name="service-client" options="-parameters" />
       <module name="service-organization" options="-parameters" />
     </option>
   </component>

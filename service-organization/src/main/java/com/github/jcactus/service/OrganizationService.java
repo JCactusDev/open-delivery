@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface OrganizationService {
 
-    OrganizationDto save(OrganizationDto organization);
+    OrganizationDto save(OrganizationDto dto);
 
     List<OrganizationDto> findAll();
 
@@ -14,9 +14,9 @@ public interface OrganizationService {
 
     Long count();
 
-    OrganizationDto updateObjectById(Long id, OrganizationDto organization);
+    OrganizationDto updateObjectById(Long id, OrganizationDto dto);
 
-    OrganizationDto updateParametersById(Long id, OrganizationDto organization);
+    OrganizationDto updateParametersById(Long id, OrganizationDto dto);
 
     void deleteById(long id);
 

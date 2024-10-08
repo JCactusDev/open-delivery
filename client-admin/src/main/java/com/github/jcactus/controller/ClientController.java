@@ -67,8 +67,7 @@ public class ClientController {
             @ModelAttribute("client") Client client) {
         client.setId(id);
         Client result = service.updateObjectById(auth, id, client);
-        model.addAttribute("client", result);
-        return "admin-panel/clients/clientEdit";
+        return "redirect:/clients/" + result.getId();
     }
 
     @PatchMapping("/{id}")
@@ -78,8 +77,7 @@ public class ClientController {
             @ModelAttribute("client") Client client) {
         client.setId(id);
         Client result = service.updateParametersById(auth, id, client);
-        model.addAttribute("client", result);
-        return "admin-panel/clients/clientEdit";
+        return "redirect:/clients/" + result.getId();
     }
 
     @DeleteMapping("/{id}")

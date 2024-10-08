@@ -1,40 +1,41 @@
 package com.github.jcactus.service;
 
-import com.github.jcactus.dto.OrganizationDto;
-import com.github.jcactus.mapper.OrganizationMapper;
-import com.github.jcactus.model.Organization;
+import com.github.jcactus.dto.ClientDto;
+import com.github.jcactus.mapper.ClientMapper;
+import com.github.jcactus.model.Client;
 import com.github.jcactus.model.OrganizationType;
-import com.github.jcactus.repository.OrganizationRepository;
+import com.github.jcactus.repository.ClientRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
 @Service
-public class OrganizationServiceImpl implements OrganizationService {
+public class ClientServiceImpl implements ClientService {
 
-    private final OrganizationRepository repository;
+    private final ClientRepository repository;
 
-    public OrganizationServiceImpl(OrganizationRepository repository) {
+    public ClientServiceImpl(ClientRepository repository) {
         this.repository = repository;
     }
 
     @Override
-    public OrganizationDto save(OrganizationDto organization) {
-        return OrganizationMapper.toDto(repository.save(OrganizationMapper.toModel(organization)));
+    public ClientDto save(ClientDto client) {
+        return ClientMapper.toDto(repository.save(ClientMapper.toModel(client)));
     }
 
     @Override
-    public List<OrganizationDto> findAll() {
+    public List<ClientDto> findAll() {
         return StreamSupport.stream(repository.findAll().spliterator(), false)
-                .map(OrganizationMapper::toDto)
+                .map(ClientMapper::toDto)
                 .collect(Collectors.toList());
     }
 
     @Override
-    public OrganizationDto findById(long id) {
-        return OrganizationMapper.toDto(repository.findById(id).orElse(null));
+    public ClientDto findById(long id) {
+        return ClientMapper.toDto(repository.findById(id).orElse(null));
     }
 
     @Override
@@ -43,27 +44,23 @@ public class OrganizationServiceImpl implements OrganizationService {
     }
 
     @Override
-    public OrganizationDto updateObjectById(Long id, OrganizationDto dto) {
-        Organization model = repository.findById(id).orElse(null);
+    public ClientDto updateObjectById(Long id, ClientDto dto) {
+        Client model = repository.findById(id).orElse(null);
         if (model == null) {
             return null;
         }
-        model.setId(id);
         model.setName(dto.getName());
         model.setFullName(dto.getFullName());
         model.setShortName(dto.getShortName());
         model.setInternationalName(dto.getInternationalName());
         model.setType(Enum.valueOf(OrganizationType.class, dto.getType()));
-        model.setTaxNumber(dto.getTaxNumber());
-        model.setRegNumber(dto.getRegNumber());
-        model.setRegDate(dto.getRegDate());
         model.setDescription(dto.getDescription());
-        return OrganizationMapper.toDto(repository.save(model));
+        return ClientMapper.toDto(repository.save(model));
     }
 
     @Override
-    public OrganizationDto updateParametersById(Long id, OrganizationDto dto) {
-        Organization model = repository.findById(id).orElse(null);
+    public ClientDto updateParametersById(Long id, ClientDto dto) {
+        Client model = repository.findById(id).orElse(null);
         if (model == null) {
             return null;
         }
@@ -82,19 +79,10 @@ public class OrganizationServiceImpl implements OrganizationService {
         if (dto.getType() != null) {
             model.setType(Enum.valueOf(OrganizationType.class, dto.getType()));
         }
-        if (dto.getTaxNumber() != null) {
-            model.setTaxNumber(dto.getTaxNumber());
-        }
-        if (dto.getRegNumber() != null) {
-            model.setRegNumber(dto.getRegNumber());
-        }
-        if (dto.getRegDate() != null) {
-            model.setRegDate(dto.getRegDate());
-        }
         if (dto.getDescription() != null) {
             model.setDescription(dto.getDescription());
         }
-        return OrganizationMapper.toDto(repository.save(model));
+        return ClientMapper.toDto(repository.save(model));
     }
 
     @Override

@@ -19,6 +19,7 @@
         <module>server-userdata</module>
         <module>server-resource</module>
         <module>service-organization</module>
+        <module>service-client</module>
         <module>client-admin</module>
     </modules>
 
