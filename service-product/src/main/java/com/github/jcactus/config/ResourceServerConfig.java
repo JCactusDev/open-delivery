@@ -16,13 +16,6 @@ public class ResourceServerConfig {
     SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         return http
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers(HttpMethod.POST, "/api/v1/clients").hasAuthority("SCOPE_clients.update")
-                        .requestMatchers(HttpMethod.GET, "/api/v1/clients").hasAuthority("SCOPE_clients.read")
-                        .requestMatchers(HttpMethod.GET, "/api/v1/clients/{id}").hasAuthority("SCOPE_clients.read")
-                        .requestMatchers(HttpMethod.PUT, "/api/v1/clients/{id}").hasAuthority("SCOPE_clients.update")
-                        .requestMatchers(HttpMethod.PATCH, "/api/v1/clients/{id}").hasAuthority("SCOPE_clients.update")
-                        .requestMatchers(HttpMethod.DELETE, "/api/v1/clients/{id}").hasAuthority("SCOPE_clients.delete")
-                        //
                         .requestMatchers(HttpMethod.POST, "/api/v1/products").hasAuthority("SCOPE_products.update")
                         .requestMatchers(HttpMethod.GET, "/api/v1/products").hasAuthority("SCOPE_products.read")
                         .requestMatchers(HttpMethod.GET, "/api/v1/products/{id}").hasAuthority("SCOPE_products.read")

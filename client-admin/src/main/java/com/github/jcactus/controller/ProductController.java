@@ -67,8 +67,7 @@ public class ProductController {
             @ModelAttribute("client") Product product) {
         product.setId(id);
         Product result = service.updateObjectById(auth, id, product);
-        model.addAttribute("product", result);
-        return "admin-panel/products/productEdit";
+        return "redirect:/products/" + result.getId();
     }
 
     @PatchMapping("/{id}")
@@ -78,8 +77,7 @@ public class ProductController {
             @ModelAttribute("product") Product product) {
         product.setId(id);
         Product result = service.updateParametersById(auth, id, product);
-        model.addAttribute("product", result);
-        return "admin-panel/products/productEdit";
+        return "redirect:/products/" + result.getId();
     }
 
     @DeleteMapping("/{id}")

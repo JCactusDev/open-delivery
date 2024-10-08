@@ -17,9 +17,9 @@
         <module>server-gateway</module>
         <module>server-authorization</module>
         <module>server-userdata</module>
-        <module>server-resource</module>
         <module>service-organization</module>
         <module>service-client</module>
+        <module>service-product</module>
         <module>client-admin</module>
     </modules>
 

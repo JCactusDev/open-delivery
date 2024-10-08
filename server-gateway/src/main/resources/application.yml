@@ -28,8 +28,8 @@ spring:
           uri: http://localhost:8002
           predicates:
             - Path=/api/v1/clients/**
-        - id: server-resource
-          uri: http://localhost:8090
+        - id: service-product
+          uri: http://localhost:8003
           predicates:
             - Path=/api/v1/products/**
       httpserver.wiretap: true

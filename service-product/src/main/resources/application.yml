@@ -1,5 +1,5 @@
 server:
-  port: 8090
+  port: 8003
 
 logging:
   level:
@@ -16,7 +16,7 @@ eureka:
 
 spring:
   application:
-    name: server-resource
+    name: service-product
   security:
     oauth2.resourceserver.jwt.issuer-uri: http://authserver:9000
   datasource:
