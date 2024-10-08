@@ -6,10 +6,10 @@ logging:
     root: INFO
     org.springframework.web: INFO
     org.springframework.security: INFO
-    org.springframework.security.oauth2: TRACE
+    org.springframework.security.oauth2: INFO
 
 eureka:
-  client.serviceUrl.defaultZone: http://127.0.0.1:8000/eureka/
+  client.serviceUrl.defaultZone: http://127.0.0.1:7000/eureka/
   instance:
     hostname: 127.0.0.1
     instance-id: ${eureka.instance.hostname}:${spring.application.name}:${server.port}
@@ -34,10 +34,10 @@ spring:
                 - authorization_code
                 - refresh_token
               redirect-uris:
-                - http://127.0.0.1:8080/login/oauth2/code/web-client-oidc
-                - http://127.0.0.1:8080/authorized
+                - http://127.0.0.1:80/login/oauth2/code/web-client-oidc
+                - http://127.0.0.1:80/authorized
               post-logout-redirect-uris:
-                - http://127.0.0.1:8080
+                - http://127.0.0.1:80
               scopes:
                 - openid
                 - users.read

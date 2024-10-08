@@ -8,7 +8,10 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="server-gateway" />
+        <module name="service-organization" />
         <module name="server-eureka" />
+        <module name="service-client" />
+        <module name="service-product" />
         <module name="server-authorization" />
         <module name="service-userdata" />
         <module name="client-admin" />
