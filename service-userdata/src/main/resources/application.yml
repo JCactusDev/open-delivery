@@ -16,7 +16,7 @@ eureka:
 
 spring:
   application:
-    name: server-userdata
+    name: service-userdata
   security:
     oauth2.resourceserver.jwt.issuer-uri: http://authserver:9000
   datasource:

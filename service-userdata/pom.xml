@@ -4,7 +4,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.github.jcactus</groupId>
-    <artifactId>server-userdata</artifactId>
+    <artifactId>service-userdata</artifactId>
     <version>0.1.0-SNAPSHOT</version>
     <packaging>jar</packaging>
     <dependencyManagement>
