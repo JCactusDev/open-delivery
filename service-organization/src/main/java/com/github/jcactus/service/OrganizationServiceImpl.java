@@ -1,14 +1,15 @@
 package com.github.jcactus.service;
 
-import java.util.Comparator;
+import com.github.jcactus.dto.OrganizationDto;
+import com.github.jcactus.mapper.OrganizationMapper;
+import com.github.jcactus.model.Organization;
+import com.github.jcactus.model.OrganizationType;
+import com.github.jcactus.repository.OrganizationRepository;
+import org.springframework.stereotype.Service;
+
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
-
-import org.springframework.stereotype.Service;
-
-import com.github.jcactus.model.Organization;
-import com.github.jcactus.repository.OrganizationRepository;
 
 @Service
 public class OrganizationServiceImpl implements OrganizationService {
@@ -20,18 +21,20 @@ public class OrganizationServiceImpl implements OrganizationService {
     }
 
     @Override
-    public Organization save(Organization organization) {
-        return repository.save(organization);
+    public OrganizationDto save(OrganizationDto organization) {
+        return OrganizationMapper.toDto(repository.save(OrganizationMapper.toModel(organization)));
     }
 
     @Override
-    public List<Organization> findAll() {
-        return StreamSupport.stream(repository.findAll().spliterator(), false).sorted(Comparator.comparing(Organization::getId)).collect(Collectors.toList());
+    public List<OrganizationDto> findAll() {
+        return StreamSupport.stream(repository.findAll().spliterator(), false)
+                .map(OrganizationMapper::toDto)
+                .collect(Collectors.toList());
     }
 
     @Override
-    public Organization findById(long id) {
-        return repository.findById(id).orElse(null);
+    public OrganizationDto findById(long id) {
+        return OrganizationMapper.toDto(repository.findById(id).orElse(null));
     }
 
     @Override
@@ -40,18 +43,26 @@ public class OrganizationServiceImpl implements OrganizationService {
     }
 
     @Override
-    public Organization updateObjectById(Long id, Organization organization) {
-        Organization updatedOrganization = repository.findById(id).orElse(null);
-        if (updatedOrganization == null) {
+    public OrganizationDto updateObjectById(Long id, OrganizationDto dto) {
+        Organization model = repository.findById(id).orElse(null);
+        if (model == null) {
             return null;
         }
-        updatedOrganization = organization.clone();
-        updatedOrganization.setId(id);
-        return repository.save(updatedOrganization);
+        model.setId(id);
+        model.setName(dto.getName());
+        model.setFullName(dto.getFullName());
+        model.setShortName(dto.getShortName());
+        model.setInternationalName(dto.getInternationalName());
+        model.setType(Enum.valueOf(OrganizationType.class, dto.getType()));
+        model.setTaxNumber(dto.getTaxNumber());
+        model.setRegNumber(dto.getRegNumber());
+        model.setRegDate(dto.getRegDate());
+        model.setDescription(dto.getDescription());
+        return OrganizationMapper.toDto(repository.save(model));
     }
 
     @Override
-    public Organization updateParametersById(Long id, Organization organization) {
+    public OrganizationDto updateParametersById(Long id, OrganizationDto organization) {
         Organization updatedOrganization = repository.findById(id).orElse(null);
         if (updatedOrganization == null) {
             return null;
@@ -69,7 +80,7 @@ public class OrganizationServiceImpl implements OrganizationService {
             updatedOrganization.setInternationalName(organization.getInternationalName());
         }
         if (organization.getType() != null) {
-            updatedOrganization.setType(organization.getType());
+            updatedOrganization.setType(Enum.valueOf(OrganizationType.class, organization.getType()));
         }
         if (organization.getTaxNumber() != null) {
             updatedOrganization.setTaxNumber(organization.getTaxNumber());
@@ -83,7 +94,7 @@ public class OrganizationServiceImpl implements OrganizationService {
         if (organization.getDescription() != null) {
             updatedOrganization.setDescription(organization.getDescription());
         }
-        return repository.save(updatedOrganization);
+        return OrganizationMapper.toDto(repository.save(updatedOrganization));
     }
 
     @Override

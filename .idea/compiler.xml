@@ -7,12 +7,13 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="server-gateway" />
+        <module name="service-organization" />
+        <module name="server-eureka" />
+        <module name="server-resource" />
         <module name="server-authorization" />
         <module name="server-userdata" />
-        <module name="server-gateway" />
-        <module name="server-eureka" />
         <module name="client-admin" />
-        <module name="server-resource" />
       </profile>
     </annotationProcessing>
   </component>
@@ -24,6 +25,7 @@
       <module name="server-gateway" options="-parameters" />
       <module name="server-resource" options="-parameters" />
       <module name="server-userdata" options="-parameters" />
+      <module name="service-organization" options="-parameters" />
     </option>
   </component>
 </project>

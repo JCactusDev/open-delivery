@@ -67,8 +67,7 @@ public class OrganizationController {
             @ModelAttribute("organization") Organization organization) {
         organization.setId(id);
         Organization result = service.updateObjectById(auth, id, organization);
-        model.addAttribute("organization", result);
-        return "admin-panel/organizations/organizationEdit";
+        return "redirect:/organizations/" + result.getId();
     }
 
     @PatchMapping("/{id}")
@@ -78,8 +77,7 @@ public class OrganizationController {
             @ModelAttribute("organization") Organization organization) {
         organization.setId(id);
         Organization result = service.updateParametersById(auth, id, organization);
-        model.addAttribute("organization", result);
-        return "admin-panel/organizations/organizationEdit";
+        return "redirect:/organizations/" + result.getId();
     }
 
     @DeleteMapping("/{id}")

@@ -18,6 +18,7 @@
         <module>server-authorization</module>
         <module>server-userdata</module>
         <module>server-resource</module>
+        <module>service-organization</module>
         <module>client-admin</module>
     </modules>
 

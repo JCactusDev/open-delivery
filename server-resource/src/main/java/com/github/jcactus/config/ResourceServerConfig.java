@@ -16,27 +16,20 @@ public class ResourceServerConfig {
     SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         return http
                 .authorizeHttpRequests(auth -> auth
-                .requestMatchers(HttpMethod.POST, "/api/v1/organizations").hasAuthority("SCOPE_organizations.update")
-                .requestMatchers(HttpMethod.GET, "/api/v1/organizations").hasAuthority("SCOPE_organizations.read")
-                .requestMatchers(HttpMethod.GET, "/api/v1/organizations/{id}").hasAuthority("SCOPE_organizations.read")
-                .requestMatchers(HttpMethod.PUT, "/api/v1/organizations/{id}").hasAuthority("SCOPE_organizations.update")
-                .requestMatchers(HttpMethod.PATCH, "/api/v1/organizations/{id}").hasAuthority("SCOPE_organizations.update")
-                .requestMatchers(HttpMethod.DELETE, "/api/v1/organizations/{id}").hasAuthority("SCOPE_organizations.delete")
-                //
-                .requestMatchers(HttpMethod.POST, "/api/v1/clients").hasAuthority("SCOPE_clients.update")
-                .requestMatchers(HttpMethod.GET, "/api/v1/clients").hasAuthority("SCOPE_clients.read")
-                .requestMatchers(HttpMethod.GET, "/api/v1/clients/{id}").hasAuthority("SCOPE_clients.read")
-                .requestMatchers(HttpMethod.PUT, "/api/v1/clients/{id}").hasAuthority("SCOPE_clients.update")
-                .requestMatchers(HttpMethod.PATCH, "/api/v1/clients/{id}").hasAuthority("SCOPE_clients.update")
-                .requestMatchers(HttpMethod.DELETE, "/api/v1/clients/{id}").hasAuthority("SCOPE_clients.delete")
-                //
-                .requestMatchers(HttpMethod.POST, "/api/v1/products").hasAuthority("SCOPE_products.update")
-                .requestMatchers(HttpMethod.GET, "/api/v1/products").hasAuthority("SCOPE_products.read")
-                .requestMatchers(HttpMethod.GET, "/api/v1/products/{id}").hasAuthority("SCOPE_products.read")
-                .requestMatchers(HttpMethod.PUT, "/api/v1/products/{id}").hasAuthority("SCOPE_products.update")
-                .requestMatchers(HttpMethod.PATCH, "/api/v1/products/{id}").hasAuthority("SCOPE_products.update")
-                .requestMatchers(HttpMethod.DELETE, "/api/v1/products/{id}").hasAuthority("SCOPE_products.delete")
-                .anyRequest().authenticated()
+                        .requestMatchers(HttpMethod.POST, "/api/v1/clients").hasAuthority("SCOPE_clients.update")
+                        .requestMatchers(HttpMethod.GET, "/api/v1/clients").hasAuthority("SCOPE_clients.read")
+                        .requestMatchers(HttpMethod.GET, "/api/v1/clients/{id}").hasAuthority("SCOPE_clients.read")
+                        .requestMatchers(HttpMethod.PUT, "/api/v1/clients/{id}").hasAuthority("SCOPE_clients.update")
+                        .requestMatchers(HttpMethod.PATCH, "/api/v1/clients/{id}").hasAuthority("SCOPE_clients.update")
+                        .requestMatchers(HttpMethod.DELETE, "/api/v1/clients/{id}").hasAuthority("SCOPE_clients.delete")
+                        //
+                        .requestMatchers(HttpMethod.POST, "/api/v1/products").hasAuthority("SCOPE_products.update")
+                        .requestMatchers(HttpMethod.GET, "/api/v1/products").hasAuthority("SCOPE_products.read")
+                        .requestMatchers(HttpMethod.GET, "/api/v1/products/{id}").hasAuthority("SCOPE_products.read")
+                        .requestMatchers(HttpMethod.PUT, "/api/v1/products/{id}").hasAuthority("SCOPE_products.update")
+                        .requestMatchers(HttpMethod.PATCH, "/api/v1/products/{id}").hasAuthority("SCOPE_products.update")
+                        .requestMatchers(HttpMethod.DELETE, "/api/v1/products/{id}").hasAuthority("SCOPE_products.delete")
+                        .anyRequest().authenticated()
                 )
                 .oauth2ResourceServer(oauth2 -> oauth2.jwt(Customizer.withDefaults()))
                 .build();
