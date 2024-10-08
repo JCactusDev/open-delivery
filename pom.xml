@@ -16,7 +16,7 @@
         <module>server-eureka</module>
         <module>server-gateway</module>
         <module>server-authorization</module>
-        <module>server-userdata</module>
+        <module>service-userdata</module>
         <module>service-organization</module>
         <module>service-client</module>
         <module>service-product</module>
