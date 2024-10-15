@@ -1,6 +1,7 @@
 package com.github.jcactus.serviceproduct.controller;
 
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,21 +15,21 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.github.jcactus.serviceproduct.model.Product;
-import com.github.jcactus.serviceproduct.service.ProductServiceImpl;
+import com.github.jcactus.serviceproduct.dto.ProductDto;
+import com.github.jcactus.serviceproduct.service.ProductService;
 
 @RestController
 @RequestMapping("/api/v1/products")
 public class ProductRestController {
 
-    private final ProductServiceImpl service;
+    private final ProductService service;
 
-    public ProductRestController(ProductServiceImpl service) {
+    public ProductRestController(ProductService service) {
         this.service = service;
     }
 
     @PostMapping(consumes = "application/json", produces = "application/json")
-    public ResponseEntity<Object> save(@RequestBody Product product) {
+    public ResponseEntity<Object> save(@RequestBody ProductDto product) {
         if (product == null
                 || product.getId() != null
                 || product.getName() == null) {
@@ -37,13 +38,13 @@ public class ProductRestController {
         if (service.existsByName(product.getName())) {
             return ResponseEntity.status(HttpStatus.CONFLICT).build();
         }
-        Product result = service.save(product);
+        ProductDto result = service.save(product);
         return ResponseEntity.status(HttpStatus.CREATED).body(result);
     }
 
     @GetMapping(produces = "application/json")
     public ResponseEntity<Object> getAll() {
-        List<Product> result = service.findAll();
+        List<ProductDto> result = service.findAll();
         return result.isEmpty() ? ResponseEntity.status(HttpStatus.NO_CONTENT).build() : ResponseEntity.status(HttpStatus.OK).body(result);
     }
 
@@ -52,12 +53,29 @@ public class ProductRestController {
         if (id == null) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
         }
-        Product result = service.findById(id);
+        ProductDto result = service.findById(id);
         return result == null ? ResponseEntity.status(HttpStatus.NOT_FOUND).build() : ResponseEntity.status(HttpStatus.OK).body(result);
     }
 
+    @GetMapping(value = "/existsAllById/{ids}", produces = "application/json")
+    public ResponseEntity<Object> existsAllById(@PathVariable Set<Long> ids) {
+        if (ids == null
+                || ids.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+        }
+        return !service.existsAllById(ids) ? ResponseEntity.status(HttpStatus.NOT_FOUND).body(false) : ResponseEntity.status(HttpStatus.FOUND).body(true);
+    }
+
+    @GetMapping(value = "/existsById/{id}", produces = "application/json")
+    public ResponseEntity<Object> existsById(@PathVariable Long id) {
+        if (id == null) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+        }
+        return !service.existsById(id) ? ResponseEntity.status(HttpStatus.NOT_FOUND).body(false) : ResponseEntity.status(HttpStatus.FOUND).body(true);
+    }
+
     @PutMapping(value = "/{id}", consumes = "application/json", produces = "application/json")
-    public ResponseEntity<Object> updateObjectById(@PathVariable Long id, @RequestBody Product product) {
+    public ResponseEntity<Object> updateObjectById(@PathVariable Long id, @RequestBody ProductDto product) {
         if (id == null
                 || product == null
                 || product.getName() == null) {
@@ -69,12 +87,12 @@ public class ProductRestController {
         if (service.existsByNameAndIdNot(product.getName(), product.getId())) {
             return ResponseEntity.status(HttpStatus.CONFLICT).build();
         }
-        Product result = service.updateObjectById(id, product);
+        ProductDto result = service.updateObjectById(id, product);
         return result == null ? ResponseEntity.status(HttpStatus.NOT_FOUND).build() : ResponseEntity.status(HttpStatus.OK).body(result);
     }
 
     @PatchMapping(value = "/{id}", consumes = "application/json", produces = "application/json")
-    public ResponseEntity<Object> updateParametersById(@PathVariable Long id, @RequestBody Product product) {
+    public ResponseEntity<Object> updateParametersById(@PathVariable Long id, @RequestBody ProductDto product) {
         if (id == null
                 || product == null) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
@@ -85,7 +103,7 @@ public class ProductRestController {
         if (service.existsByNameAndIdNot(product.getName(), product.getId())) {
             return ResponseEntity.status(HttpStatus.CONFLICT).build();
         }
-        Product result = service.updateParametersById(id, product);
+        ProductDto result = service.updateParametersById(id, product);
         return result == null ? ResponseEntity.status(HttpStatus.NOT_FOUND).build() : ResponseEntity.status(HttpStatus.OK).body(result);
     }
 

@@ -21,6 +21,7 @@ public class SecurityConfig {
                         .requestMatchers(HttpMethod.GET, "/api/v1/users/getByUsername/{username}").anonymous()
                         .requestMatchers(HttpMethod.GET, "/api/v1/users").hasAuthority("SCOPE_users.read")
                         .requestMatchers(HttpMethod.GET, "/api/v1/users/{id}").hasAuthority("SCOPE_users.read")
+                        .requestMatchers(HttpMethod.GET, "/api/v1/users/existsById/{id}").hasAuthority("SCOPE_users.read")
                         .requestMatchers(HttpMethod.PUT, "/api/v1/users/{id}").hasAuthority("SCOPE_users.update")
                         .requestMatchers(HttpMethod.PATCH, "/api/v1/users/{id}").hasAuthority("SCOPE_users.update")
                         .requestMatchers(HttpMethod.DELETE, "/api/v1/users/{id}").hasAuthority("SCOPE_users.delete")

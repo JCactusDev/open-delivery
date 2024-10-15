@@ -19,6 +19,8 @@ public class ResourceServerConfig {
                         .requestMatchers(HttpMethod.POST, "/api/v1/products").hasAuthority("SCOPE_products.update")
                         .requestMatchers(HttpMethod.GET, "/api/v1/products").hasAuthority("SCOPE_products.read")
                         .requestMatchers(HttpMethod.GET, "/api/v1/products/{id}").hasAuthority("SCOPE_products.read")
+                        .requestMatchers(HttpMethod.GET, "/api/v1/products/existsAllById/{ids}").hasAuthority("SCOPE_products.read")
+                        .requestMatchers(HttpMethod.GET, "/api/v1/products/existsById/{id}").hasAuthority("SCOPE_products.read")
                         .requestMatchers(HttpMethod.PUT, "/api/v1/products/{id}").hasAuthority("SCOPE_products.update")
                         .requestMatchers(HttpMethod.PATCH, "/api/v1/products/{id}").hasAuthority("SCOPE_products.update")
                         .requestMatchers(HttpMethod.DELETE, "/api/v1/products/{id}").hasAuthority("SCOPE_products.delete")

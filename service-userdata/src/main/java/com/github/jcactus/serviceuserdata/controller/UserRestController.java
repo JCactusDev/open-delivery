@@ -68,6 +68,14 @@ public class UserRestController {
         return result == null ? ResponseEntity.status(HttpStatus.NOT_FOUND).build() : ResponseEntity.status(HttpStatus.OK).body(result);
     }
 
+    @GetMapping(value = "/existsById/{id}", produces = "application/json")
+    public ResponseEntity<Object> existsById(@PathVariable Long id) {
+        if (id == null) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+        }
+        return !service.existsById(id) ? ResponseEntity.status(HttpStatus.NOT_FOUND).body(false) : ResponseEntity.status(HttpStatus.FOUND).body(true);
+    }
+
     @PutMapping(value = "/{id}", consumes = "application/json", produces = "application/json")
     public ResponseEntity<Object> updateObjectById(@PathVariable Long id, @RequestBody User user) {
         if (id == null

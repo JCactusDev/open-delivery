@@ -19,6 +19,7 @@ public class SecurityConfig {
                         .requestMatchers(HttpMethod.POST, "/api/v1/clients").hasAuthority("SCOPE_clients.update")
                         .requestMatchers(HttpMethod.GET, "/api/v1/clients").hasAuthority("SCOPE_clients.read")
                         .requestMatchers(HttpMethod.GET, "/api/v1/clients/{id}").hasAuthority("SCOPE_clients.read")
+                        .requestMatchers(HttpMethod.GET, "/api/v1/clients/existsById/{id}").hasAuthority("SCOPE_clients.read")
                         .requestMatchers(HttpMethod.PUT, "/api/v1/clients/{id}").hasAuthority("SCOPE_clients.update")
                         .requestMatchers(HttpMethod.PATCH, "/api/v1/clients/{id}").hasAuthority("SCOPE_clients.update")
                         .requestMatchers(HttpMethod.DELETE, "/api/v1/clients/{id}").hasAuthority("SCOPE_clients.delete")

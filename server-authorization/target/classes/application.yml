@@ -52,3 +52,6 @@ spring:
                 - products.read
                 - products.update
                 - products.delete
+                - orders.read
+                - orders.update
+                - orders.delete

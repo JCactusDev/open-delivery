@@ -1,7 +1,7 @@
 package com.github.jcactus.serviceorganization.controller;
 
 import com.github.jcactus.serviceorganization.dto.OrganizationDto;
-import com.github.jcactus.serviceorganization.service.OrganizationServiceImpl;
+import com.github.jcactus.serviceorganization.service.OrganizationService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -12,9 +12,9 @@ import java.util.List;
 @RequestMapping("/api/v1/organizations")
 public class OrganizationRestController {
 
-    private final OrganizationServiceImpl service;
+    private final OrganizationService service;
 
-    public OrganizationRestController(OrganizationServiceImpl service) {
+    public OrganizationRestController(OrganizationService service) {
         this.service = service;
     }
 
@@ -50,6 +50,14 @@ public class OrganizationRestController {
         }
         OrganizationDto result = service.findById(id);
         return result == null ? ResponseEntity.status(HttpStatus.NOT_FOUND).build() : ResponseEntity.status(HttpStatus.OK).body(result);
+    }
+
+    @GetMapping(value = "/existsById/{id}", produces = "application/json")
+    public ResponseEntity<Object> existsById(@PathVariable Long id) {
+        if (id == null) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+        }
+        return !service.existsById(id) ? ResponseEntity.status(HttpStatus.NOT_FOUND).body(false) : ResponseEntity.status(HttpStatus.FOUND).body(true);
     }
 
     @PutMapping(value = "/{id}", consumes = "application/json", produces = "application/json")

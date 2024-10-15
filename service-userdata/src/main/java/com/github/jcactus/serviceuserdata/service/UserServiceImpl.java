@@ -15,7 +15,7 @@ import com.github.jcactus.serviceuserdata.repository.UserRepository;
 @Service
 public class UserServiceImpl implements UserService {
 
-    UserRepository userRepository;
+    private final UserRepository userRepository;
 
     public UserServiceImpl(UserRepository userRepository) {
         this.userRepository = userRepository;

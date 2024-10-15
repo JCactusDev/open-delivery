@@ -1,22 +1,23 @@
 package com.github.jcactus.serviceproduct.service;
 
-import com.github.jcactus.serviceproduct.model.Product;
+import com.github.jcactus.serviceproduct.dto.ProductDto;
 
 import java.util.List;
+import java.util.Set;
 
 public interface ProductService {
 
-    Product save(Product product);
+    ProductDto save(ProductDto product);
 
-    List<Product> findAll();
+    List<ProductDto> findAll();
 
-    Product findById(long id);
+    ProductDto findById(long id);
 
     Long count();
 
-    Product updateObjectById(Long id, Product product);
+    ProductDto updateObjectById(Long id, ProductDto product);
 
-    Product updateParametersById(Long id, Product product);
+    ProductDto updateParametersById(Long id, ProductDto product);
 
     void deleteById(long id);
 
@@ -25,5 +26,7 @@ public interface ProductService {
     boolean existsByName(String name);
 
     boolean existsByNameAndIdNot(String name, Long id);
+
+    boolean existsAllById(Set<Long> ids);
 
 }

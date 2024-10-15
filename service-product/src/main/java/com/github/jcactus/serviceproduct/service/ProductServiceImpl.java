@@ -1,13 +1,15 @@
 package com.github.jcactus.serviceproduct.service;
 
-import java.util.Comparator;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
+import com.github.jcactus.serviceproduct.mapper.ProductMapper;
 import org.springframework.stereotype.Service;
 
 import com.github.jcactus.serviceproduct.model.Product;
+import com.github.jcactus.serviceproduct.dto.ProductDto;
 import com.github.jcactus.serviceproduct.repository.ProductRepository;
 
 @Service
@@ -20,18 +22,18 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public Product save(Product product) {
-        return repository.save(product);
+    public ProductDto save(ProductDto product) {
+        return ProductMapper.toDto(repository.save(ProductMapper.toModel(product)));
     }
 
     @Override
-    public List<Product> findAll() {
-        return StreamSupport.stream(repository.findAll().spliterator(), false).sorted(Comparator.comparing(Product::getId)).collect(Collectors.toList());
+    public List<ProductDto> findAll() {
+        return StreamSupport.stream(repository.findAll().spliterator(), false).map(ProductMapper::toDto).collect(Collectors.toList());
     }
 
     @Override
-    public Product findById(long id) {
-        return repository.findById(id).orElse(null);
+    public ProductDto findById(long id) {
+        return ProductMapper.toDto(repository.findById(id).orElse(null));
     }
 
     @Override
@@ -40,29 +42,30 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public Product updateObjectById(Long id, Product product) {
-        Product updatedProduct = repository.findById(id).orElse(null);
-        if (updatedProduct == null) {
+    public ProductDto updateObjectById(Long id, ProductDto dto) {
+        Product model = repository.findById(id).orElse(null);
+        if (model == null) {
             return null;
         }
-        updatedProduct = product.clone();
-        updatedProduct.setId(id);
-        return repository.save(updatedProduct);
+        model.setId(id);
+        model.setName(dto.getName());
+        model.setDescription(dto.getDescription());
+        return ProductMapper.toDto(repository.save(model));
     }
 
     @Override
-    public Product updateParametersById(Long id, Product product) {
+    public ProductDto updateParametersById(Long id, ProductDto dto) {
         Product updatedProduct = repository.findById(id).orElse(null);
         if (updatedProduct == null) {
             return null;
         }
-        if (product.getName() != null) {
-            updatedProduct.setName(product.getName());
+        if (dto.getName() != null) {
+            updatedProduct.setName(dto.getName());
         }
-        if (product.getDescription() != null) {
-            updatedProduct.setDescription(product.getDescription());
+        if (dto.getDescription() != null) {
+            updatedProduct.setDescription(dto.getDescription());
         }
-        return repository.save(updatedProduct);
+        return ProductMapper.toDto(repository.save(updatedProduct));
     }
 
     @Override
@@ -83,6 +86,11 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public boolean existsByNameAndIdNot(String name, Long id) {
         return repository.existsByNameAndIdNot(name, id);
+    }
+
+    @Override
+    public boolean existsAllById(Set<Long> ids) {
+        return repository.existsAllById(ids);
     }
 
 }

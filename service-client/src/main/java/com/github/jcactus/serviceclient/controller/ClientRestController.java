@@ -1,7 +1,7 @@
 package com.github.jcactus.serviceclient.controller;
 
 import com.github.jcactus.serviceclient.dto.ClientDto;
-import com.github.jcactus.serviceclient.service.ClientServiceImpl;
+import com.github.jcactus.serviceclient.service.ClientService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -12,9 +12,9 @@ import java.util.List;
 @RequestMapping("/api/v1/clients")
 public class ClientRestController {
 
-    private final ClientServiceImpl service;
+    private final ClientService service;
 
-    public ClientRestController(ClientServiceImpl service) {
+    public ClientRestController(ClientService service) {
         this.service = service;
     }
 
@@ -48,6 +48,14 @@ public class ClientRestController {
         }
         ClientDto result = service.findById(id);
         return result == null ? ResponseEntity.status(HttpStatus.NOT_FOUND).build() : ResponseEntity.status(HttpStatus.OK).body(result);
+    }
+
+    @GetMapping(value = "/existsById/{id}", produces = "application/json")
+    public ResponseEntity<Object> existsById(@PathVariable Long id) {
+        if (id == null) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+        }
+        return !service.existsById(id) ? ResponseEntity.status(HttpStatus.NOT_FOUND).body(false) : ResponseEntity.status(HttpStatus.FOUND).body(true);
     }
 
     @PutMapping(value = "/{id}", consumes = "application/json", produces = "application/json")

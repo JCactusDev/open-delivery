@@ -17,7 +17,6 @@ public class ProductServiceImpl implements ProductService {
 
     private final WebClient webClient;
 
-
     public ProductServiceImpl(WebClient defaultWebClient) {
         this.webClient = defaultWebClient;
     }

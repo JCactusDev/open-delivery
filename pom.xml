@@ -20,6 +20,7 @@
         <module>service-organization</module>
         <module>service-client</module>
         <module>service-product</module>
+        <module>service-order</module>
         <module>client-admin</module>
     </modules>
 
