@@ -23,9 +23,7 @@
     <label for="type">Форма собственности*</label>
     <select name="type" id="type" th:field="*{organization.type}" required>
         <option value="" selected hidden>Выберите форму собственности</option>
-        <option value="LegalPerson">Юридическое лицо</option>
-        <option value="SoleProprietorship">Индивидуальный предприниматель</option>
-        <option value="SelfEmployment">Самозанятый</option>
+        <option th:each="type : ${T(com.github.jcactus.clientadmin.model.OrganizationType).values()}" th:value="${type}" th:text="${type.view}"></option>
     </select>
 
     <label for="taxNumber">ИНН</label>
@@ -76,9 +74,7 @@
     <label for="type">Форма собственности*</label>
     <select name="type" id="type" th:field="*{organization.type}" required>
         <option value="" selected hidden>Выберите форму собственности</option>
-        <option value="LegalPerson">Юридическое лицо</option>
-        <option value="SoleProprietorship">Индивидуальный предприниматель</option>
-        <option value="SelfEmployment">Самозанятый</option>
+        <option th:each="type : ${T(com.github.jcactus.clientadmin.model.OrganizationType).values()}" th:value="${type}" th:text="${type.view}"></option>
     </select>
 
     <label for="taxNumber">ИНН</label>

@@ -57,9 +57,9 @@ public class OrganizationServiceImpl implements OrganizationService {
     }
 
     @Override
-    public Organization updateObject(OAuth2AuthorizedClient auth, Long id, Organization organization) {
+    public Organization updateObject(OAuth2AuthorizedClient auth, Organization organization) {
         return webClient.put()
-                .uri("http://127.0.0.1:8080/api/v1/organizations/" + id)
+                .uri("http://127.0.0.1:8080/api/v1/organizations")
                 .attributes(oauth2AuthorizedClient(auth))
                 .bodyValue(organization)
                 .retrieve()
@@ -68,9 +68,9 @@ public class OrganizationServiceImpl implements OrganizationService {
     }
 
     @Override
-    public Organization updateParameters(OAuth2AuthorizedClient auth, Long id, Organization organization) {
+    public Organization updateParameters(OAuth2AuthorizedClient auth, Organization organization) {
         return webClient.patch()
-                .uri("http://127.0.0.1:8080/api/v1/organizations/" + id)
+                .uri("http://127.0.0.1:8080/api/v1/organizations")
                 .attributes(oauth2AuthorizedClient(auth))
                 .bodyValue(organization)
                 .retrieve()

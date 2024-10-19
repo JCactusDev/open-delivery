@@ -3,15 +3,17 @@
     <tr>
         <td>ID</td>
         <td>Наименование</td>
+        <td>Форма собственности</td>
     </tr>
     </thead>
     <tbody>
     <tr th:if="${clients.size() > 0}" th:each="client : ${clients}">
         <td th:text="${client.id}">id</td>
-        <td><a th:href="@{/clients/{id}(id=${client.id})}">[[${client.name}]]</a></td>
+        <td><a th:href="@{/clients/{id}(id=${client.id})}" th:text="${client.name}"></a></td>
+        <td th:text="${client.type.view}">id</td>
     </tr>
     <tr th:unless="${clients.size() > 0}">
-        <th scope="row" colspan="4">Пусто</th>
+        <th scope="row" colspan="3">Пусто</th>
     </tr>
     </tbody>
     <tfoot th:if="${clients.size() > 0}">

@@ -65,7 +65,7 @@ public class UserController {
             @PathVariable("id") Long id,
             @ModelAttribute("user") User user) {
         user.setId(id);
-        User result = service.updateObject(auth, id, user);
+        User result = service.updateObject(auth, user);
         return "redirect:/users/" + result.getId();
     }
 
@@ -75,7 +75,7 @@ public class UserController {
             @PathVariable("id") Long id,
             @ModelAttribute("user") User user) {
         user.setId(id);
-        User result = service.updateParameters(auth, id, user);
+        User result = service.updateParameters(auth, user);
         return "redirect:/users/" + result.getId();
     }
 

@@ -14,9 +14,9 @@ public interface UserService {
 
     User getById(OAuth2AuthorizedClient auth, Long id);
 
-    User updateObject(OAuth2AuthorizedClient auth, Long id, User user);
+    User updateObject(OAuth2AuthorizedClient auth, User user);
 
-    User updateParameters(OAuth2AuthorizedClient auth, Long id, User user);
+    User updateParameters(OAuth2AuthorizedClient auth, User user);
 
     void deleteById(OAuth2AuthorizedClient auth, Long id);
 

@@ -66,7 +66,7 @@ public class ProductController {
             @PathVariable("id") Long id,
             @ModelAttribute("client") Product product) {
         product.setId(id);
-        Product result = service.updateObject(auth, id, product);
+        Product result = service.updateObject(auth, product);
         return "redirect:/products/" + result.getId();
     }
 
@@ -76,7 +76,7 @@ public class ProductController {
             @PathVariable("id") Long id,
             @ModelAttribute("product") Product product) {
         product.setId(id);
-        Product result = service.updateParameters(auth, id, product);
+        Product result = service.updateParameters(auth, product);
         return "redirect:/products/" + result.getId();
     }
 

@@ -2,6 +2,7 @@ package com.github.jcactus.clientadmin.controller;
 
 import java.util.List;
 
+import com.github.jcactus.clientadmin.services.ClientService;
 import org.springframework.security.oauth2.client.OAuth2AuthorizedClient;
 import org.springframework.security.oauth2.client.annotation.RegisteredOAuth2AuthorizedClient;
 import org.springframework.stereotype.Controller;
@@ -16,15 +17,14 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.github.jcactus.clientadmin.model.Client;
-import com.github.jcactus.clientadmin.services.ClientServiceImpl;
 
 @Controller
 @RequestMapping("/clients")
 public class ClientController {
 
-    private final ClientServiceImpl service;
+    private final ClientService service;
 
-    public ClientController(ClientServiceImpl service) {
+    public ClientController(ClientService service) {
         this.service = service;
     }
 
@@ -62,21 +62,19 @@ public class ClientController {
 
     @PutMapping("/{id}")
     public String updateObject(@RegisteredOAuth2AuthorizedClient("web-client-oidc") OAuth2AuthorizedClient auth,
-            Model model,
             @PathVariable("id") Long id,
             @ModelAttribute("client") Client client) {
         client.setId(id);
-        Client result = service.updateObject(auth, id, client);
+        Client result = service.updateObject(auth, client);
         return "redirect:/clients/" + result.getId();
     }
 
     @PatchMapping("/{id}")
     public String updateParameters(@RegisteredOAuth2AuthorizedClient("web-client-oidc") OAuth2AuthorizedClient auth,
-            Model model,
             @PathVariable("id") Long id,
             @ModelAttribute("client") Client client) {
         client.setId(id);
-        Client result = service.updateParameters(auth, id, client);
+        Client result = service.updateParameters(auth, client);
         return "redirect:/clients/" + result.getId();
     }
 

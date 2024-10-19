@@ -66,7 +66,7 @@ public class OrganizationController {
             @PathVariable("id") Long id,
             @ModelAttribute("organization") Organization organization) {
         organization.setId(id);
-        Organization result = service.updateObject(auth, id, organization);
+        Organization result = service.updateObject(auth, organization);
         return "redirect:/organizations/" + result.getId();
     }
 
@@ -76,7 +76,7 @@ public class OrganizationController {
             @PathVariable("id") Long id,
             @ModelAttribute("organization") Organization organization) {
         organization.setId(id);
-        Organization result = service.updateParameters(auth, id, organization);
+        Organization result = service.updateParameters(auth, organization);
         return "redirect:/organizations/" + result.getId();
     }
 

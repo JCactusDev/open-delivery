@@ -1,9 +1,9 @@
 package com.github.jcactus.clientadmin.model;
 
 public enum OrganizationType {
-    LegalPerson("Legal Person"),
-    SoleProprietorship("Sole Proprietorship"),
-    SelfEmployment("Self Employment");
+    LegalPerson("Юридическое лицо"),
+    SoleProprietorship("Индивидуальный предприниматель"),
+    SelfEmployment("Самозанятый");
 
     private String view;
 

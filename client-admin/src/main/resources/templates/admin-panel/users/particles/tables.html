@@ -11,12 +11,12 @@
         <td><a th:href="@{/users/{id}(id=${user.id})}">[[${user.username}]]</a></td>
     </tr>
     <tr th:unless="${users.size() > 0}">
-        <th scope="row" colspan="4">Пусто</th>
+        <th scope="row" colspan="2">Пусто</th>
     </tr>
     </tbody>
     <tfoot th:if="${users.size() > 0}">
     <tr>
-        <th scope="row" colspan="2">Всего:</th>
+        <th scope="row" colspan="1">Всего:</th>
         <th>[[${users.size()}]]</th>
     </tr>
     </tfoot>

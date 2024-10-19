@@ -4,6 +4,7 @@
         <td>ID</td>
         <td>Наименование</td>
         <td>ИНН</td>
+        <td>Форма собственности</td>
     </tr>
     </thead>
     <tbody>
@@ -11,6 +12,7 @@
         <td th:text="${organization.id}">id</td>
         <td><a th:href="@{/organizations/{id}(id=${organization.id})}">[[${organization.name}]]</a></td>
         <td>[[${organization.taxNumber}]]</td>
+        <td>[[${organization.type.view}]]</td>
     </tr>
     <tr th:unless="${organizations.size() > 0}">
         <th scope="row" colspan="4">Пусто</th>
@@ -18,7 +20,7 @@
     </tbody>
     <tfoot th:if="${organizations.size() > 0}">
     <tr>
-        <th scope="row" colspan="2">Всего:</th>
+        <th scope="row" colspan="3">Всего:</th>
         <th>[[${organizations.size()}]]</th>
     </tr>
     </tfoot>

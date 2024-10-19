@@ -11,12 +11,12 @@
         <td><a th:href="@{/products/{id}(id=${product.id})}">[[${product.name}]]</a></td>
     </tr>
     <tr th:unless="${products.size() > 0}">
-        <th scope="row" colspan="4">Пусто</th>
+        <th scope="row" colspan="2">Пусто</th>
     </tr>
     </tbody>
     <tfoot th:if="${products.size() > 0}">
     <tr>
-        <th scope="row" colspan="2">Всего:</th>
+        <th scope="row" colspan="1">Всего:</th>
         <th>[[${products.size()}]]</th>
     </tr>
     </tfoot>

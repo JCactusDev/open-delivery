@@ -58,9 +58,9 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public Product updateObject(OAuth2AuthorizedClient auth, Long id, Product product) {
+    public Product updateObject(OAuth2AuthorizedClient auth, Product product) {
         return webClient.put()
-                .uri("http://127.0.0.1:8080/api/v1/products/" + id)
+                .uri("http://127.0.0.1:8080/api/v1/products")
                 .attributes(oauth2AuthorizedClient(auth))
                 .bodyValue(product)
                 .retrieve()
@@ -69,9 +69,9 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public Product updateParameters(OAuth2AuthorizedClient auth, Long id, Product product) {
+    public Product updateParameters(OAuth2AuthorizedClient auth, Product product) {
         return webClient.patch()
-                .uri("http://127.0.0.1:8080/api/v1/products/" + id)
+                .uri("http://127.0.0.1:8080/api/v1/products")
                 .attributes(oauth2AuthorizedClient(auth))
                 .bodyValue(product)
                 .retrieve()
