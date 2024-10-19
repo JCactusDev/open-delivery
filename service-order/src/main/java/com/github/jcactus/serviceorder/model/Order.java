@@ -24,6 +24,9 @@ public class Order implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(name = "state")
+    private OrderState state;
+
     @Column(name = "organization_id")
     private Long organizationId;
 
@@ -33,6 +36,13 @@ public class Order implements Serializable {
     @OneToMany(mappedBy = "order", fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonManagedReference
     private List<OrderPosition> positions;
+
+    public String getState() {
+        if (state == null) {
+            return null;
+        }
+        return state.toString();
+    }
 
     public void addPosition(OrderPosition position) {
         position.setOrder(this);
@@ -62,6 +72,7 @@ public class Order implements Serializable {
         Order other = (Order) otherObject;
         // Проверка хранимых значений в свойствах объекта
         return Objects.equals(id, other.id)
+                && Objects.equals(state, other.state)
                 && Objects.equals(organizationId, other.organizationId)
                 && Objects.equals(clientId, other.clientId)
                 && Objects.equals(positions, other.positions);
@@ -69,10 +80,7 @@ public class Order implements Serializable {
 
     @Override
     public int hashCode() {
-        return 31 * ((id == null) ? 0 : id.hashCode())
-                + 31 * ((organizationId == null) ? 0 : organizationId.hashCode())
-                + 31 * ((clientId == null) ? 0 : clientId.hashCode())
-                + 31 * ((positions == null) ? 0 : positions.hashCode());
+        return Objects.hash(id, state, organizationId, clientId, positions);
     }
 
     @Override

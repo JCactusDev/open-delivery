@@ -4,6 +4,7 @@ import com.github.jcactus.serviceorder.dto.OrderDto;
 import com.github.jcactus.serviceorder.dto.OrderPositionDto;
 import com.github.jcactus.serviceorder.model.Order;
 import com.github.jcactus.serviceorder.model.OrderPosition;
+import com.github.jcactus.serviceorder.model.OrderState;
 
 import java.util.stream.Collectors;
 
@@ -15,6 +16,7 @@ public class OrderMapper {
         }
         Order model = new Order();
         model.setId(dto.getId());
+        model.setState(Enum.valueOf(OrderState.class, dto.getState()));
         model.setOrganizationId(dto.getOrganizationId());
         model.setClientId(dto.getClientId());
         model.setPositions(
@@ -39,6 +41,7 @@ public class OrderMapper {
         }
         OrderDto dto = new OrderDto();
         dto.setId(model.getId());
+        dto.setState(model.getState());
         dto.setOrganizationId(model.getOrganizationId());
         dto.setClientId(model.getClientId());
         dto.setPositions(

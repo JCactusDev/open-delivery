@@ -4,6 +4,7 @@ import com.github.jcactus.serviceorder.dto.OrderDto;
 import com.github.jcactus.serviceorder.mapper.OrderMapper;
 import com.github.jcactus.serviceorder.model.Order;
 import com.github.jcactus.serviceorder.model.OrderPosition;
+import com.github.jcactus.serviceorder.model.OrderState;
 import com.github.jcactus.serviceorder.repository.OrderRepository;
 import org.springframework.cloud.client.ServiceInstance;
 import org.springframework.cloud.client.discovery.DiscoveryClient;
@@ -60,6 +61,7 @@ public class OrderServiceImpl implements OrderService {
         if (model == null) {
             return null;
         }
+        model.setState(Enum.valueOf(OrderState.class, dto.getState()));
         model.setOrganizationId(dto.getOrganizationId());
         model.setClientId(dto.getClientId());
         model.setPositions(
@@ -83,6 +85,9 @@ public class OrderServiceImpl implements OrderService {
         Order model = repository.findById(dto.getId()).orElse(null);
         if (model == null) {
             return null;
+        }
+        if (dto.getState() != null) {
+            model.setState(Enum.valueOf(OrderState.class, dto.getState()));
         }
         if (dto.getOrganizationId() != null) {
             model.setOrganizationId(dto.getOrganizationId());
