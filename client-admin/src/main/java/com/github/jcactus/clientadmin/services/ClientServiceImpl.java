@@ -58,7 +58,7 @@ public class ClientServiceImpl implements ClientService {
     }
 
     @Override
-    public Client updateObjectById(OAuth2AuthorizedClient auth, Long id, Client client) {
+    public Client updateObject(OAuth2AuthorizedClient auth, Long id, Client client) {
         return webClient.put()
                 .uri("http://127.0.0.1:8080/api/v1/clients/" + id)
                 .attributes(oauth2AuthorizedClient(auth))
@@ -69,7 +69,7 @@ public class ClientServiceImpl implements ClientService {
     }
 
     @Override
-    public Client updateParametersById(OAuth2AuthorizedClient auth, Long id, Client client) {
+    public Client updateParameters(OAuth2AuthorizedClient auth, Long id, Client client) {
         return webClient.patch()
                 .uri("http://127.0.0.1:8080/api/v1/clients/" + id)
                 .attributes(oauth2AuthorizedClient(auth))

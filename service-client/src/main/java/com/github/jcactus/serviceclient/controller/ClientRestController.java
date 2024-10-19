@@ -58,39 +58,39 @@ public class ClientRestController {
         return !service.existsById(id) ? ResponseEntity.status(HttpStatus.NOT_FOUND).body(false) : ResponseEntity.status(HttpStatus.FOUND).body(true);
     }
 
-    @PutMapping(value = "/{id}", consumes = "application/json", produces = "application/json")
-    public ResponseEntity<Object> updateObjectById(@PathVariable Long id, @RequestBody ClientDto client) {
-        if (id == null
-                || client == null
+    @PutMapping(consumes = "application/json", produces = "application/json")
+    public ResponseEntity<Object> updateObject(@RequestBody ClientDto client) {
+        if (client == null
+                || client.getId() == null
                 || client.getName() == null
                 || client.getFullName() == null
                 || client.getShortName() == null
                 || client.getType() == null) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
         }
-        if (!service.existsById(id)) {
+        if (!service.existsById(client.getId())) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }
         if (service.existsByNameAndIdNot(client.getName(), client.getId())) {
             return ResponseEntity.status(HttpStatus.CONFLICT).build();
         }
-        ClientDto result = service.updateObjectById(id, client);
+        ClientDto result = service.updateObject(client);
         return result == null ? ResponseEntity.status(HttpStatus.NOT_FOUND).build() : ResponseEntity.status(HttpStatus.OK).body(result);
     }
 
-    @PatchMapping(value = "/{id}", consumes = "application/json", produces = "application/json")
-    public ResponseEntity<Object> updateParametersById(@PathVariable Long id, @RequestBody ClientDto client) {
-        if (id == null
-                || client == null) {
+    @PatchMapping(consumes = "application/json", produces = "application/json")
+    public ResponseEntity<Object> updateParameters(@RequestBody ClientDto client) {
+        if (client == null
+                || client.getId() == null) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
         }
-        if (!service.existsById(id)) {
+        if (!service.existsById(client.getId())) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }
         if (service.existsByNameAndIdNot(client.getName(), client.getId())) {
             return ResponseEntity.status(HttpStatus.CONFLICT).build();
         }
-        ClientDto result = service.updateParametersById(id, client);
+        ClientDto result = service.updateParameters(client);
         return result == null ? ResponseEntity.status(HttpStatus.NOT_FOUND).build() : ResponseEntity.status(HttpStatus.OK).body(result);
     }
 

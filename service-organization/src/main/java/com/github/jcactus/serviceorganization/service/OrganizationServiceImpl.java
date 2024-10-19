@@ -43,8 +43,8 @@ public class OrganizationServiceImpl implements OrganizationService {
     }
 
     @Override
-    public OrganizationDto updateObjectById(Long id, OrganizationDto dto) {
-        Organization model = repository.findById(id).orElse(null);
+    public OrganizationDto updateObject(OrganizationDto dto) {
+        Organization model = repository.findById(dto.getId()).orElse(null);
         if (model == null) {
             return null;
         }
@@ -61,8 +61,8 @@ public class OrganizationServiceImpl implements OrganizationService {
     }
 
     @Override
-    public OrganizationDto updateParametersById(Long id, OrganizationDto dto) {
-        Organization model = repository.findById(id).orElse(null);
+    public OrganizationDto updateParameters(OrganizationDto dto) {
+        Organization model = repository.findById(dto.getId()).orElse(null);
         if (model == null) {
             return null;
         }

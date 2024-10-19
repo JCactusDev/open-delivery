@@ -14,9 +14,9 @@ public interface ClientService {
 
     Long count();
 
-    ClientDto updateObjectById(Long id, ClientDto client);
+    ClientDto updateObject(ClientDto client);
 
-    ClientDto updateParametersById(Long id, ClientDto client);
+    ClientDto updateParameters(ClientDto client);
 
     void deleteById(long id);
 

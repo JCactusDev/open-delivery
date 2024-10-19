@@ -42,8 +42,8 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public ProductDto updateObjectById(Long id, ProductDto dto) {
-        Product model = repository.findById(id).orElse(null);
+    public ProductDto updateObject(ProductDto dto) {
+        Product model = repository.findById(dto.getId()).orElse(null);
         if (model == null) {
             return null;
         }
@@ -53,18 +53,18 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public ProductDto updateParametersById(Long id, ProductDto dto) {
-        Product updatedProduct = repository.findById(id).orElse(null);
-        if (updatedProduct == null) {
+    public ProductDto updateParameters(ProductDto dto) {
+        Product model = repository.findById(dto.getId()).orElse(null);
+        if (model == null) {
             return null;
         }
         if (dto.getName() != null) {
-            updatedProduct.setName(dto.getName());
+            model.setName(dto.getName());
         }
         if (dto.getDescription() != null) {
-            updatedProduct.setDescription(dto.getDescription());
+            model.setDescription(dto.getDescription());
         }
-        return ProductMapper.toDto(repository.save(updatedProduct));
+        return ProductMapper.toDto(repository.save(model));
     }
 
     @Override

@@ -61,22 +61,22 @@ public class OrganizationController {
     }
 
     @PutMapping("/{id}")
-    public String updateObjectById(@RegisteredOAuth2AuthorizedClient("web-client-oidc") OAuth2AuthorizedClient auth,
+    public String updateObject(@RegisteredOAuth2AuthorizedClient("web-client-oidc") OAuth2AuthorizedClient auth,
             Model model,
             @PathVariable("id") Long id,
             @ModelAttribute("organization") Organization organization) {
         organization.setId(id);
-        Organization result = service.updateObjectById(auth, id, organization);
+        Organization result = service.updateObject(auth, id, organization);
         return "redirect:/organizations/" + result.getId();
     }
 
     @PatchMapping("/{id}")
-    public String updateParametersById(@RegisteredOAuth2AuthorizedClient("web-client-oidc") OAuth2AuthorizedClient auth,
+    public String updateParameters(@RegisteredOAuth2AuthorizedClient("web-client-oidc") OAuth2AuthorizedClient auth,
             Model model,
             @PathVariable("id") Long id,
             @ModelAttribute("organization") Organization organization) {
         organization.setId(id);
-        Organization result = service.updateParametersById(auth, id, organization);
+        Organization result = service.updateParameters(auth, id, organization);
         return "redirect:/organizations/" + result.getId();
     }
 

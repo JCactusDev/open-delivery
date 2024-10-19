@@ -67,12 +67,12 @@ public class OrderRestController {
         return !service.existsById(id) ? ResponseEntity.status(HttpStatus.NOT_FOUND).body(false) : ResponseEntity.status(HttpStatus.FOUND).body(true);
     }
 
-    @PutMapping(value = "/{id}", consumes = "application/json", produces = "application/json")
-    public ResponseEntity<Object> updateObjectById(JwtAuthenticationToken jwtAuthenticationToken,
-                                                   @PathVariable Long id, @RequestBody OrderDto order) {
+    @PutMapping(consumes = "application/json", produces = "application/json")
+    public ResponseEntity<Object> updateObject(JwtAuthenticationToken jwtAuthenticationToken,
+                                                   @RequestBody OrderDto order) {
         String token = jwtAuthenticationToken.getToken().getTokenValue();
-        if (id == null
-                || order == null
+        if (order == null
+                || order.getId() == null
                 || order.getOrganizationId() == null
                 || !service.existsOrganizationById(token, order.getOrganizationId())
                 || order.getClientId() == null
@@ -85,19 +85,19 @@ public class OrderRestController {
                 )) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
         }
-        if (!service.existsById(id)) {
+        if (!service.existsById(order.getId())) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }
-        OrderDto result = service.updateObjectById(id, order);
+        OrderDto result = service.updateObject(order);
         return result == null ? ResponseEntity.status(HttpStatus.NOT_FOUND).build() : ResponseEntity.status(HttpStatus.OK).body(result);
     }
 
-    @PatchMapping(value = "/{id}", consumes = "application/json", produces = "application/json")
-    public ResponseEntity<Object> updateParametersById(JwtAuthenticationToken jwtAuthenticationToken,
-                                                       @PathVariable Long id, @RequestBody OrderDto order) {
+    @PatchMapping(consumes = "application/json", produces = "application/json")
+    public ResponseEntity<Object> updateParameters(JwtAuthenticationToken jwtAuthenticationToken,
+                                                       @RequestBody OrderDto order) {
         String token = jwtAuthenticationToken.getToken().getTokenValue();
-        if (id == null
-                || order == null
+        if (order == null
+                || order.getId() == null
                 || (order.getOrganizationId() != null && !service.existsOrganizationById(token, order.getOrganizationId()))
                 || (order.getClientId() != null && !service.existsClientById(token, order.getClientId()))
                 || (!order.getPositions().isEmpty() && !service.existsAllProductById(token,
@@ -107,10 +107,10 @@ public class OrderRestController {
                 ))) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
         }
-        if (!service.existsById(id)) {
+        if (!service.existsById(order.getId())) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }
-        OrderDto result = service.updateParametersById(id, order);
+        OrderDto result = service.updateParameters(order);
         return result == null ? ResponseEntity.status(HttpStatus.NOT_FOUND).build() : ResponseEntity.status(HttpStatus.OK).body(result);
     }
 

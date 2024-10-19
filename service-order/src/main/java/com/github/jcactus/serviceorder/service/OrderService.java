@@ -14,9 +14,9 @@ public interface OrderService {
 
     Long count();
 
-    OrderDto updateObjectById(Long id, OrderDto order);
+    OrderDto updateObject(OrderDto order);
 
-    OrderDto updateParametersById(Long id, OrderDto order);
+    OrderDto updateParameters(OrderDto order);
 
     void deleteById(long id);
 

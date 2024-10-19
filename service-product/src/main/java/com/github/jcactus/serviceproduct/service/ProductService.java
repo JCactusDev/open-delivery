@@ -15,9 +15,9 @@ public interface ProductService {
 
     Long count();
 
-    ProductDto updateObjectById(Long id, ProductDto product);
+    ProductDto updateObject(ProductDto product);
 
-    ProductDto updateParametersById(Long id, ProductDto product);
+    ProductDto updateParameters(ProductDto product);
 
     void deleteById(long id);
 

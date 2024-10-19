@@ -60,10 +60,10 @@ public class OrganizationRestController {
         return !service.existsById(id) ? ResponseEntity.status(HttpStatus.NOT_FOUND).body(false) : ResponseEntity.status(HttpStatus.FOUND).body(true);
     }
 
-    @PutMapping(value = "/{id}", consumes = "application/json", produces = "application/json")
-    public ResponseEntity<Object> updateObjectById(@PathVariable Long id, @RequestBody OrganizationDto organization) {
-        if (id == null
-                || organization == null
+    @PutMapping(consumes = "application/json", produces = "application/json")
+    public ResponseEntity<Object> updateObject(@RequestBody OrganizationDto organization) {
+        if (organization == null
+                || organization.getId() == null
                 || organization.getName() == null
                 || organization.getFullName() == null
                 || organization.getShortName() == null
@@ -72,29 +72,29 @@ public class OrganizationRestController {
                 || organization.getRegDate() == null) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
         }
-        if (!service.existsById(id)) {
+        if (!service.existsById(organization.getId())) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }
         if (service.existsByNameAndIdNot(organization.getName(), organization.getId())) {
             return ResponseEntity.status(HttpStatus.CONFLICT).build();
         }
-        OrganizationDto result = service.updateObjectById(id, organization);
+        OrganizationDto result = service.updateObject(organization);
         return result == null ? ResponseEntity.status(HttpStatus.NOT_FOUND).build() : ResponseEntity.status(HttpStatus.OK).body(result);
     }
 
-    @PatchMapping(value = "/{id}", consumes = "application/json", produces = "application/json")
-    public ResponseEntity<Object> updateParametersById(@PathVariable Long id, @RequestBody OrganizationDto organization) {
-        if (id == null
-                || organization == null) {
+    @PatchMapping(consumes = "application/json", produces = "application/json")
+    public ResponseEntity<Object> updateParameters(@RequestBody OrganizationDto organization) {
+        if (organization == null
+                || organization.getId() == null) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
         }
-        if (!service.existsById(id)) {
+        if (!service.existsById(organization.getId())) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }
         if (service.existsByNameAndIdNot(organization.getName(), organization.getId())) {
             return ResponseEntity.status(HttpStatus.CONFLICT).build();
         }
-        OrganizationDto result = service.updateParametersById(id, organization);
+        OrganizationDto result = service.updateParameters(organization);
         return result == null ? ResponseEntity.status(HttpStatus.NOT_FOUND).build() : ResponseEntity.status(HttpStatus.OK).body(result);
     }
 

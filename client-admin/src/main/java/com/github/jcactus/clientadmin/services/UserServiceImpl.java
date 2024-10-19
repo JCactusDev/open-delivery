@@ -61,7 +61,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User updateObjectById(OAuth2AuthorizedClient auth, Long id, User user) {
+    public User updateObject(OAuth2AuthorizedClient auth, Long id, User user) {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         return webClient.put()
                 .uri("http://127.0.0.1:8080/api/v1/users/" + id)
@@ -73,7 +73,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User updateParametersById(OAuth2AuthorizedClient auth, Long id, User user) {
+    public User updateParameters(OAuth2AuthorizedClient auth, Long id, User user) {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         return webClient.patch()
                 .uri("http://127.0.0.1:8080/api/v1/users/" + id)

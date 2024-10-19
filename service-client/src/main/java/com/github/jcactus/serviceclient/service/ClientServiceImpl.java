@@ -43,8 +43,8 @@ public class ClientServiceImpl implements ClientService {
     }
 
     @Override
-    public ClientDto updateObjectById(Long id, ClientDto dto) {
-        Client model = repository.findById(id).orElse(null);
+    public ClientDto updateObject(ClientDto dto) {
+        Client model = repository.findById(dto.getId()).orElse(null);
         if (model == null) {
             return null;
         }
@@ -58,8 +58,8 @@ public class ClientServiceImpl implements ClientService {
     }
 
     @Override
-    public ClientDto updateParametersById(Long id, ClientDto dto) {
-        Client model = repository.findById(id).orElse(null);
+    public ClientDto updateParameters(ClientDto dto) {
+        Client model = repository.findById(dto.getId()).orElse(null);
         if (model == null) {
             return null;
         }

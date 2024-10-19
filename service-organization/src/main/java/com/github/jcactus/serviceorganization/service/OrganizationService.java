@@ -14,9 +14,9 @@ public interface OrganizationService {
 
     Long count();
 
-    OrganizationDto updateObjectById(Long id, OrganizationDto dto);
+    OrganizationDto updateObject(OrganizationDto dto);
 
-    OrganizationDto updateParametersById(Long id, OrganizationDto dto);
+    OrganizationDto updateParameters(OrganizationDto dto);
 
     void deleteById(long id);
 

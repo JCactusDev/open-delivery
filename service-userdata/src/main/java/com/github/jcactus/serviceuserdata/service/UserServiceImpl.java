@@ -70,8 +70,8 @@ public class UserServiceImpl implements UserService {
 
     @Override
     @Transactional
-    public User updateObjectById(Long id, User user) {
-        User updateUser = userRepository.findById(id).orElse(null);
+    public User updateObject(User user) {
+        User updateUser = userRepository.findById(user.getId()).orElse(null);
         if (updateUser == null) {
             return null;
         }
@@ -81,8 +81,8 @@ public class UserServiceImpl implements UserService {
 
     @Override
     @Transactional
-    public User updateParametersById(Long id, User user) {
-        User updateUser = userRepository.findById(id).orElse(null);
+    public User updateParameters(User user) {
+        User updateUser = userRepository.findById(user.getId()).orElse(null);
         if (updateUser == null) {
             return null;
         }

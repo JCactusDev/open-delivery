@@ -22,9 +22,9 @@ public interface UserService {
 
     Long count();
 
-    User updateObjectById(Long id, User user);
+    User updateObject(User user);
 
-    User updateParametersById(Long id, User user);
+    User updateParameters(User user);
 
     void deleteById(long id);
 

@@ -76,39 +76,39 @@ public class UserRestController {
         return !service.existsById(id) ? ResponseEntity.status(HttpStatus.NOT_FOUND).body(false) : ResponseEntity.status(HttpStatus.FOUND).body(true);
     }
 
-    @PutMapping(value = "/{id}", consumes = "application/json", produces = "application/json")
-    public ResponseEntity<Object> updateObjectById(@PathVariable Long id, @RequestBody User user) {
-        if (id == null
-                || user == null
+    @PutMapping(consumes = "application/json", produces = "application/json")
+    public ResponseEntity<Object> updateObject(@RequestBody User user) {
+        if (user == null
+                || user.getId() == null
                 || user.getUsername() == null
                 || user.getPassword() == null
                 || user.getAuthorities() == null
                 || user.getState() == null) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
         }
-        if (!service.existsById(id)) {
+        if (!service.existsById(user.getId())) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }
         if (service.existsByUsernameAndIdNot(user.getUsername(), user.getId())) {
             return ResponseEntity.status(HttpStatus.CONFLICT).build();
         }
-        User result = service.updateObjectById(id, user);
+        User result = service.updateObject(user);
         return result == null ? ResponseEntity.status(HttpStatus.NOT_FOUND).build() : ResponseEntity.status(HttpStatus.OK).body(result);
     }
 
-    @PatchMapping(value = "/{id}", consumes = "application/json", produces = "application/json")
-    public ResponseEntity<Object> updateParametersById(@PathVariable Long id, @RequestBody User user) {
-        if (id == null
-                || user == null) {
+    @PatchMapping(consumes = "application/json", produces = "application/json")
+    public ResponseEntity<Object> updateParameters(@RequestBody User user) {
+        if (user == null
+                || user.getId() == null) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
         }
-        if (!service.existsById(id)) {
+        if (!service.existsById(user.getId())) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }
         if (service.existsByUsernameAndIdNot(user.getUsername(), user.getId())) {
             return ResponseEntity.status(HttpStatus.CONFLICT).build();
         }
-        User result = service.updateParametersById(id, user);
+        User result = service.updateParameters(user);
         return result == null ? ResponseEntity.status(HttpStatus.NOT_FOUND).build() : ResponseEntity.status(HttpStatus.OK).body(result);
     }
 

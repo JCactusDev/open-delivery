@@ -55,8 +55,8 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public OrderDto updateObjectById(Long id, OrderDto dto) {
-        Order model = repository.findById(id).orElse(null);
+    public OrderDto updateObject(OrderDto dto) {
+        Order model = repository.findById(dto.getId()).orElse(null);
         if (model == null) {
             return null;
         }
@@ -79,8 +79,8 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public OrderDto updateParametersById(Long id, OrderDto dto) {
-        Order model = repository.findById(id).orElse(null);
+    public OrderDto updateParameters(OrderDto dto) {
+        Order model = repository.findById(dto.getId()).orElse(null);
         if (model == null) {
             return null;
         }

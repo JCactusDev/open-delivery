@@ -14,9 +14,9 @@ public interface ProductService {
 
     Product getById(OAuth2AuthorizedClient auth, Long id);
 
-    Product updateObjectById(OAuth2AuthorizedClient auth, Long id, Product product);
+    Product updateObject(OAuth2AuthorizedClient auth, Long id, Product product);
 
-    Product updateParametersById(OAuth2AuthorizedClient auth, Long id, Product product);
+    Product updateParameters(OAuth2AuthorizedClient auth, Long id, Product product);
 
     void deleteById(OAuth2AuthorizedClient auth, Long id);
 

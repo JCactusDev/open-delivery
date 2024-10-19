@@ -74,36 +74,36 @@ public class ProductRestController {
         return !service.existsById(id) ? ResponseEntity.status(HttpStatus.NOT_FOUND).body(false) : ResponseEntity.status(HttpStatus.FOUND).body(true);
     }
 
-    @PutMapping(value = "/{id}", consumes = "application/json", produces = "application/json")
-    public ResponseEntity<Object> updateObjectById(@PathVariable Long id, @RequestBody ProductDto product) {
-        if (id == null
-                || product == null
+    @PutMapping(consumes = "application/json", produces = "application/json")
+    public ResponseEntity<Object> updateObject(@RequestBody ProductDto product) {
+        if (product == null
+                || product.getId() == null
                 || product.getName() == null) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
         }
-        if (!service.existsById(id)) {
+        if (!service.existsById(product.getId())) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }
         if (service.existsByNameAndIdNot(product.getName(), product.getId())) {
             return ResponseEntity.status(HttpStatus.CONFLICT).build();
         }
-        ProductDto result = service.updateObjectById(id, product);
+        ProductDto result = service.updateObject(product);
         return result == null ? ResponseEntity.status(HttpStatus.NOT_FOUND).build() : ResponseEntity.status(HttpStatus.OK).body(result);
     }
 
-    @PatchMapping(value = "/{id}", consumes = "application/json", produces = "application/json")
-    public ResponseEntity<Object> updateParametersById(@PathVariable Long id, @RequestBody ProductDto product) {
-        if (id == null
-                || product == null) {
+    @PatchMapping(consumes = "application/json", produces = "application/json")
+    public ResponseEntity<Object> updateParameters(@RequestBody ProductDto product) {
+        if (product == null
+                || product.getId() == null) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
         }
-        if (!service.existsById(id)) {
+        if (!service.existsById(product.getId())) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }
         if (service.existsByNameAndIdNot(product.getName(), product.getId())) {
             return ResponseEntity.status(HttpStatus.CONFLICT).build();
         }
-        ProductDto result = service.updateParametersById(id, product);
+        ProductDto result = service.updateParameters(product);
         return result == null ? ResponseEntity.status(HttpStatus.NOT_FOUND).build() : ResponseEntity.status(HttpStatus.OK).body(result);
     }
 

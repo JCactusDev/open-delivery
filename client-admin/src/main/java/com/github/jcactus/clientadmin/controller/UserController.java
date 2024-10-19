@@ -60,22 +60,22 @@ public class UserController {
     }
 
     @PutMapping("/{id}")
-    public String updateObjectById(@RegisteredOAuth2AuthorizedClient("web-client-oidc") OAuth2AuthorizedClient auth,
+    public String updateObject(@RegisteredOAuth2AuthorizedClient("web-client-oidc") OAuth2AuthorizedClient auth,
             Model model,
             @PathVariable("id") Long id,
             @ModelAttribute("user") User user) {
         user.setId(id);
-        User result = service.updateObjectById(auth, id, user);
+        User result = service.updateObject(auth, id, user);
         return "redirect:/users/" + result.getId();
     }
 
     @PatchMapping("/{id}")
-    public String updateParametersById(@RegisteredOAuth2AuthorizedClient("web-client-oidc") OAuth2AuthorizedClient auth,
+    public String updateParameters(@RegisteredOAuth2AuthorizedClient("web-client-oidc") OAuth2AuthorizedClient auth,
             Model model,
             @PathVariable("id") Long id,
             @ModelAttribute("user") User user) {
         user.setId(id);
-        User result = service.updateParametersById(auth, id, user);
+        User result = service.updateParameters(auth, id, user);
         return "redirect:/users/" + result.getId();
     }
 

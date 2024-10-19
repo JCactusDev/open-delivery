@@ -14,9 +14,9 @@ public interface ClientService {
 
     Client getById(OAuth2AuthorizedClient auth, Long id);
 
-    Client updateObjectById(OAuth2AuthorizedClient auth, Long id, Client client);
+    Client updateObject(OAuth2AuthorizedClient auth, Long id, Client client);
 
-    Client updateParametersById(OAuth2AuthorizedClient auth, Long id, Client client);
+    Client updateParameters(OAuth2AuthorizedClient auth, Long id, Client client);
 
     void deleteById(OAuth2AuthorizedClient auth, Long id);
 

@@ -61,22 +61,22 @@ public class ClientController {
     }
 
     @PutMapping("/{id}")
-    public String updateObjectById(@RegisteredOAuth2AuthorizedClient("web-client-oidc") OAuth2AuthorizedClient auth,
+    public String updateObject(@RegisteredOAuth2AuthorizedClient("web-client-oidc") OAuth2AuthorizedClient auth,
             Model model,
             @PathVariable("id") Long id,
             @ModelAttribute("client") Client client) {
         client.setId(id);
-        Client result = service.updateObjectById(auth, id, client);
+        Client result = service.updateObject(auth, id, client);
         return "redirect:/clients/" + result.getId();
     }
 
     @PatchMapping("/{id}")
-    public String updateParametersById(@RegisteredOAuth2AuthorizedClient("web-client-oidc") OAuth2AuthorizedClient auth,
+    public String updateParameters(@RegisteredOAuth2AuthorizedClient("web-client-oidc") OAuth2AuthorizedClient auth,
             Model model,
             @PathVariable("id") Long id,
             @ModelAttribute("client") Client client) {
         client.setId(id);
-        Client result = service.updateParametersById(auth, id, client);
+        Client result = service.updateParameters(auth, id, client);
         return "redirect:/clients/" + result.getId();
     }
 

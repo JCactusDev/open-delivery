@@ -14,9 +14,9 @@ public interface OrganizationService {
 
     Organization getById(OAuth2AuthorizedClient auth, Long id);
 
-    Organization updateObjectById(OAuth2AuthorizedClient auth, Long id, Organization organization);
+    Organization updateObject(OAuth2AuthorizedClient auth, Long id, Organization organization);
 
-    Organization updateParametersById(OAuth2AuthorizedClient auth, Long id, Organization organization);
+    Organization updateParameters(OAuth2AuthorizedClient auth, Long id, Organization organization);
 
     void deleteById(OAuth2AuthorizedClient auth, Long id);
 
