@@ -60,7 +60,6 @@ public class OrderServiceImpl implements OrderService {
         if (model == null) {
             return null;
         }
-        model.setId(dto.getId());
         model.setOrganizationId(dto.getOrganizationId());
         model.setClientId(dto.getClientId());
         model.setPositions(

@@ -48,7 +48,6 @@ public class OrganizationServiceImpl implements OrganizationService {
         if (model == null) {
             return null;
         }
-        model.setId(id);
         model.setName(dto.getName());
         model.setFullName(dto.getFullName());
         model.setShortName(dto.getShortName());

@@ -47,7 +47,6 @@ public class ProductServiceImpl implements ProductService {
         if (model == null) {
             return null;
         }
-        model.setId(id);
         model.setName(dto.getName());
         model.setDescription(dto.getDescription());
         return ProductMapper.toDto(repository.save(model));
